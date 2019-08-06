@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Immutable from 'immutee';
 import { api, INITIAL_STATE } from './../../config/config';
 
@@ -30,7 +29,8 @@ export default (state = INITIAL_STATE, action) => {
 
 export function fetchGetAllCountries() {
     return (dispatch) => {
-        return axios.get(`${api}/`)
+        return fetch((`${api}/`)
+            .then(res => res.json())
             .then(res => dispatch({
                 type: FETCH_APP_COUNTRIES,
                 payload: res.data

@@ -4,11 +4,14 @@ import Search from '../../../components/search';
 import Card from '../../../components/cards';
 import useCountries from '../../../state/countries/hooks/useCountries'
 import useCountriesByName from '../../../state/countries/hooks/useCountriesByName'
+import useCountriesByRegion from '../../../state/countries/hooks/useCountriesByRegion'
+import Filter from '../../../components/filter';
 
 const List = () => {
 
   const [coutries, isLoading, setListCoutries] = useCountries();
   const [searchCountry, setSearchCountry] = useCountriesByName();
+  const [searchByRegion, setSearchByRegion] = useCountriesByRegion();
 
   useEffect(() => {
     if (!coutries.list || coutries.list.length === 0) {
@@ -17,12 +20,21 @@ const List = () => {
   }, []);
 
   const search = (country) => {
-    setSearchCountry(country)
+    country
+      ? setSearchCountry(country)
+      : setListCoutries();
+  }
+
+  const filter = (region) => {
+    region
+      ? setSearchByRegion(region)
+      : setListCoutries();
   }
 
   return (
     <div>
       <Search search={search} />
+      <Filter filter={filter} />
       <div className='container'>
         {
           coutries.list && coutries.list.map((country, index) =>

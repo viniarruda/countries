@@ -6,3 +6,9 @@ export const loadCountries = () => {
         .then(res => res.data)
         .catch(err => err.response.data)
 };
+
+export const loadCountriesByName = (name) => {
+    return axios.get(`${api}name/${name}`)
+        .then(res => res.data)
+        .catch(err => err.response.data)
+};

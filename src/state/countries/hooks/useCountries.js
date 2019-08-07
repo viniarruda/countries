@@ -1,27 +1,27 @@
-import { useState } from 'react'
-import { useStateValue } from '../../index'
-import { loadCountries } from '../queries'
-import { listCountries } from '../actions'
+import { useState } from "react";
+import { useStateValue } from "../../index";
+import { loadCountries } from "../queries";
+import { listCountries } from "../actions";
 
 const useCountries = () => {
-    const [{ countries }, dispatch] = useStateValue()
-    const [isLoading, setIsLoading] = useState(false)
+  const [{ countries }, dispatch] = useStateValue();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const request = async () => {
-        setIsLoading(true)
+  const request = async () => {
+    setIsLoading(true);
 
-        const response = await loadCountries();
+    const response = await loadCountries();
 
-        if (response) {
-            dispatch(listCountries(response))
-        } else {
-            const err = []
-            dispatch(listCountries(err))
-        }
-        setIsLoading(false)
+    if (response) {
+      dispatch(listCountries(response));
+    } else {
+      const err = [];
+      dispatch(listCountries(err));
     }
+    setIsLoading(false);
+  };
 
-    return [countries, isLoading, request]
-}
+  return [isLoading, request];
+};
 
-export default useCountries
+export default useCountries;

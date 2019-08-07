@@ -11,7 +11,7 @@ const Filter = ({ filter }) => {
 
     return (
         <select value={filterValue} onChange={handlerFilter}>
-            <option value='' selected>Filter by Region</option>
+            <option value='' defaultValue>Filter by Region</option>
             <option value='Africa' >Africa</option>
             <option value='Americas' >Americas</option>
             <option value='Asia' >Asia</option>
